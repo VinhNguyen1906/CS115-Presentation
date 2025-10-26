@@ -27,14 +27,14 @@ class LogisticRegressionSGD:
                 xi = X[i]
                 yi = y[i]
                 linear_model = np.dot(xi, self.weights) + self.bias
-                y_pred = self._sigmoid(linear_model)
-                dw = xi * (y_pred - yi)
-                db = y_pred - yi
+                y_pred_i = self._sigmoid(linear_model)
+                dw = xi * (y_pred_i - yi)
+                db = y_pred_i - yi
                 self.weights -= lr_t * dw
                 self.bias -= lr_t * db
             linear_model = np.dot(X, self.weights) + self.bias
-            y_pred_full = self._sigmoid(linear_model)
-            cost = -(1/n_samples) * np.sum(y * np.log(y_pred_full + 1e-8) + (1 - y) * np.log(1 - y_pred_full + 1e-8))
+            y_pred = self._sigmoid(linear_model)
+            cost = -(1/n_samples) * np.sum(y * np.log(y_pred + 1e-8) + (1 - y) * np.log(1 - y_pred + 1e-8))
             self.costs.append(cost)
     def _sigmoid(self, x):
         return 1 / (1 + np.exp(-x)) 
@@ -42,4 +42,5 @@ class LogisticRegressionSGD:
         linear_model = np.dot(X, self.weights) + self.bias
         y_predicted = self._sigmoid(linear_model)
         y_predicted_cls = [1 if i > 0.5 else 0 for i in y_predicted]
+
         return y_predicted_cls
