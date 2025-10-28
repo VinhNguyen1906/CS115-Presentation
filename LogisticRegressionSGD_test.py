@@ -15,10 +15,11 @@ def accuracy(y_true, y_pred):
 regressor = LogisticRegressionSGD(epochs=1000, random_state=42)
 regressor.fit(X_train, y_train)
 predictions = regressor.predict(X_test)
-print("LR classification accuracy:", accuracy(y_test, predictions))
+print("LR SGD classification accuracy:", accuracy(y_test, predictions))
 plt.plot(range(len(regressor.costs)), regressor.costs)
 plt.xlabel('Epochs')
 plt.ylabel('Cost')
 plt.title('Stochastic Gradient Descent')
 plt.show()
+
 
