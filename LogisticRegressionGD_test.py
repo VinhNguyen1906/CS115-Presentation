@@ -17,10 +17,11 @@ def accuracy(y_true, y_pred):
 regressor = LogisticRegressionGD(lr= 1e-2, epochs=1000)
 regressor.fit(X_train_norm, y_train)
 predictions = regressor.predict(X_test_norm)
-print("LR classification accuracy:", accuracy(y_test, predictions))
+print("LR GD classification accuracy:", accuracy(y_test, predictions))
 plt.plot(range(len(regressor.costs)), regressor.costs)
 plt.xlabel('Epochs')
 plt.ylabel('Cost')
 plt.title('Gradient Descent')
 plt.show()
+
 
