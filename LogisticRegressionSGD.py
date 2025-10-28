@@ -1,17 +1,20 @@
 import numpy as np
 
 class LogisticRegressionSGD:
-    def __init__(self, lr=0.001, epochs=1000, alpha=0.0001, t0=1.0):
+    def __init__(self, lr=0.001, epochs=1000, alpha=0.0001, t0=1.0, random_state=42):
         self.lr = lr
         self.epochs = epochs
         self.alpha = alpha
         self.t0 = t0
+        self.random_state = random_state
         self.weights = None
         self.bias = None
         self.costs = []
     def _get_optimal_lr(self, epoch):
         return 1.0 / (self.alpha * (self.t0 + epoch))
     def fit(self, X, y):
+        if self.random_state is not None:
+            np.random.seed(self.random_state)
         X = np.array(X)
         y = np.array(y)
         n_samples, n_features = X.shape
@@ -27,9 +30,9 @@ class LogisticRegressionSGD:
                 xi = X[i]
                 yi = y[i]
                 linear_model = np.dot(xi, self.weights) + self.bias
-                y_pred_i = self._sigmoid(linear_model)
-                dw = xi * (y_pred_i - yi)
-                db = y_pred_i - yi
+                y_predi = self._sigmoid(linear_model)
+                dw = xi * (y_predi - yi)
+                db = y_predi - yi
                 self.weights -= lr_t * dw
                 self.bias -= lr_t * db
             linear_model = np.dot(X, self.weights) + self.bias
@@ -42,5 +45,5 @@ class LogisticRegressionSGD:
         linear_model = np.dot(X, self.weights) + self.bias
         y_predicted = self._sigmoid(linear_model)
         y_predicted_cls = [1 if i > 0.5 else 0 for i in y_predicted]
-
         return y_predicted_cls
+
