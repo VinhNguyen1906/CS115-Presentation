@@ -1,4 +1,3 @@
-import numpy as np
 import torch
 import torch.nn as nn
 from torch.optim import Adam
@@ -28,4 +27,5 @@ class LogisticRegressionAdam:
         X = torch.tensor(X, dtype=torch.float32)
         with torch.no_grad():
             y_pred = self._sigmoid(X @ self.weights + self.bias)
+
         return [1 if i > 0.5 else 0 for i in y_pred]
