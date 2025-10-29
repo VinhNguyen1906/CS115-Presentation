@@ -8,8 +8,8 @@ Logistic Regression
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/thaiminh2022/app_ta.git
-   cd app_ta
+   git clone https://
+   cd CS115-Presentation
    ```
 
 ### Syncing
